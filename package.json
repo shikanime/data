@@ -8,5 +8,8 @@
     "url": "https://github.com/infinity-blackhole/data-platform-poc.git"
   },
   "author": "engineering@shikanime.studio",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@dataform/core": "^3.0.8"
+  }
 }
