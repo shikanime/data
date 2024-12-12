@@ -28,6 +28,6 @@ npm install
 
 Run the Dataform project:
 
-````shell
+```shell
 npx @dataform/cli run
 ```
