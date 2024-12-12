@@ -1,0 +1,5 @@
+dataformCoreVersion: 3.0.8
+defaultProject: shikanime-studio-labs
+defaultLocation: EU
+defaultDataset: dataform
+defaultAssertionDataset: dataform_assertions

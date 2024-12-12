@@ -21,6 +21,10 @@
       devenv.shells.default = {
         containers = pkgs.lib.mkForce { };
         languages = {
+          javascript = {
+            enable = true;
+            npm.enable = true;
+          };
           terraform = {
             enable = true;
             package = pkgs.opentofu;
