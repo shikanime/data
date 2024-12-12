@@ -1,7 +1,7 @@
 {
-  "name": "data-platform",
+  "name": "data-platform-poc",
   "version": "0.1.0",
-  "description": "Data platform",
+  "description": "Data Platform POC",
   "private": true,
   "repository": {
     "type": "git",

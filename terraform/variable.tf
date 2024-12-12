@@ -1,18 +1,18 @@
 variable "name" {
   type        = string
-  default     = "data-platform"
+  default     = "data-platform-poc"
   description = "Name"
 }
 
 variable "display_name" {
   type        = string
-  default     = "Data Platform"
+  default     = "Data Platform POC"
   description = "Human readable name"
 }
 
 variable "description" {
   type        = string
-  default     = "Data Platform"
+  default     = "Data Platform POC"
   description = "Description"
 }
 
