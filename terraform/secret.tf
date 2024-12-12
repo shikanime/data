@@ -1,3 +1,7 @@
+locals {
+  github_deploy_key_secret_version = module.secret_manager.secret_versions[0]
+}
+
 resource "tls_private_key" "github_deploy_key" {
   algorithm = "ED25519"
 }

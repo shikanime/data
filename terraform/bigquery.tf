@@ -40,7 +40,7 @@ resource "google_dataform_repository" "default" {
     url            = "ssh://git@github.com/${var.repository}"
     default_branch = "main"
     ssh_authentication_config {
-      user_private_key_secret_version = module.secret_manager.secret_versions[0]
+      user_private_key_secret_version = local.github_deploy_key_secret_version
       host_public_key = join("\n", [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"
       ])
