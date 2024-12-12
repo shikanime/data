@@ -13,7 +13,7 @@ module "bigquery_assertions" {
   source  = "terraform-google-modules/bigquery/google"
   version = "~> 9.0"
 
-  dataset_id   = "${var.name}_assertions"
+  dataset_id   = "${replace(var.name, "-", "_")}_assertions"
   dataset_name = "${var.display_name} assertions"
   description  = "Dataform assertions"
   project_id   = var.project
@@ -31,6 +31,16 @@ resource "google_dataform_repository" "default" {
 
   workspace_compilation_overrides {
     default_database = var.project
+  }
+  git_remote_settings {
+    url            = "ssh://git@github.com/${var.repository}"
+    default_branch = "main"
+    ssh_authentication_config {
+      user_private_key_secret_version = module.secret_manager.secret_versions[0]
+      host_public_key = join("\n", [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"
+      ])
+    }
   }
 }
 
