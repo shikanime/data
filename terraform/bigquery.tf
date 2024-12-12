@@ -1,8 +1,12 @@
+locals {
+  dataset_id = replace(var.name, "-", "_")
+}
+
 module "bigquery" {
   source  = "terraform-google-modules/bigquery/google"
   version = "~> 9.0"
 
-  dataset_id   = var.name
+  dataset_id   = local.dataset_id
   dataset_name = var.display_name
   description  = var.description
   project_id   = var.project
@@ -13,7 +17,7 @@ module "bigquery_assertions" {
   source  = "terraform-google-modules/bigquery/google"
   version = "~> 9.0"
 
-  dataset_id   = "${replace(var.name, "-", "_")}_assertions"
+  dataset_id   = "${local.dataset_id}_assertions"
   dataset_name = "${var.display_name} assertions"
   description  = "Dataform assertions"
   project_id   = var.project

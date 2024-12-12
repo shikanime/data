@@ -1,6 +1,6 @@
 variable "name" {
   type        = string
-  default     = "data"
+  default     = "data-platform"
   description = "Name"
 }
 
