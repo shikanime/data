@@ -13,5 +13,6 @@ module "cloud_storage" {
     "sg-exports"      = true
     "binance-exports" = true
   }
-  viewers = module.service_accounts.emails_list
+  set_viewer_roles = true
+  viewers          = module.service_accounts.iam_emails_list
 }

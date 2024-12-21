@@ -11,6 +11,191 @@ module "bigquery" {
   description  = var.description
   project_id   = var.project
   location     = var.location
+
+  access = [
+    {
+      role          = "OWNER"
+      special_group = "projectOwners"
+    },
+    {
+      role          = "READER"
+      user_by_email = "service-${data.google_project.default.number}@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
+    },
+    {
+      role          = "WRITER"
+      user_by_email = module.service_accounts.email
+    }
+  ]
+  tables = [
+    {
+      table_id    = "binance_transactions"
+      description = "Binance transactions"
+      table_name  = "Binance Transactions"
+      schema = jsonencode([
+        {
+          name        = "User_ID"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Unique identifier for the user"
+        },
+        {
+          name        = "UTC_Time"
+          type        = "TIMESTAMP"
+          mode        = "REQUIRED"
+          description = "Timestamp of the transaction in UTC"
+        },
+        {
+          name        = "Account"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Account identifier where the transaction occurred"
+        },
+        {
+          name        = "Operation"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Type of operation performed"
+        },
+        {
+          name        = "Coin"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Cryptocurrency symbol"
+        },
+        {
+          name        = "Change"
+          type        = "FLOAT64"
+          mode        = "REQUIRED"
+          description = "Amount of cryptocurrency involved in the transaction"
+        },
+        {
+          name        = "Remark"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Additional notes or comments about the transaction"
+        }
+      ])
+      clustering = [
+        "User_ID",
+        "Account",
+      ]
+      require_partition_filter = true
+      time_partitioning = {
+        expiration_ms = null
+        field = "UTC_Time"
+        type  = "DAY"
+      }
+      range_partitioning = null
+      expiration_time    = null
+      labels = {}
+    },
+    {
+      table_id    = "sg_current_transactions"
+      description = "Societe Generale current account transactions"
+      table_name  = "SG Current"
+      schema = jsonencode([
+        {
+          name        = "date_de_l_operation"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Original date string of the operation"
+        },
+        {
+          name        = "libelle"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Transaction label or description"
+        },
+        {
+          name        = "detail_de_l_ecriture"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Detailed description of the transaction"
+        },
+        {
+          name        = "montant_de_l_operation"
+          type        = "FLOAT64"
+          mode        = "REQUIRED"
+          description = "Transaction amount"
+        },
+        {
+          name        = "devise"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Currency code"
+        },
+        {
+          name        = "date"
+          type        = "DATE"
+          mode        = "REQUIRED"
+          description = "Parsed date of the transaction"
+        }
+      ])
+      clustering = []
+      require_partition_filter = true
+      time_partitioning = {
+        expiration_ms = null
+        field = "date"
+        type  = "DAY"
+      }
+      range_partitioning = null
+      expiration_time    = null
+      labels = {}
+    },
+    {
+      table_id    = "sg_saving_transactions"
+      description = "Societe Generale savings transactions"
+      table_name  = "SG Saving"
+      schema = jsonencode([
+        {
+          name        = "date_comptabilisation"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Original accounting date string"
+        },
+        {
+          name        = "libelle_complet_operation"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Complete transaction description"
+        },
+        {
+          name        = "montant_operation"
+          type        = "FLOAT64"
+          mode        = "REQUIRED"
+          description = "Transaction amount"
+        },
+        {
+          name        = "devise"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Currency code"
+        },
+        {
+          name        = "date"
+          type        = "DATE"
+          mode        = "REQUIRED"
+          description = "Parsed date of the transaction"
+        },
+        {
+          name        = "account"
+          type        = "STRING"
+          mode        = "REQUIRED"
+          description = "Savings account identifier"
+        }
+      ])
+      clustering = ["account"]
+      require_partition_filter = true
+      time_partitioning = {
+        expiration_ms = null
+        field = "date"
+        type  = "DAY"
+      }
+      range_partitioning = null
+      expiration_time    = null
+      labels = {}
+    }
+  ]
 }
 
 module "bigquery_assertions" {
@@ -22,25 +207,16 @@ module "bigquery_assertions" {
   description  = "Dataform assertions"
   project_id   = var.project
   location     = var.location
-}
-
-module "bigquery_datasets_iam" {
-  source  = "terraform-google-modules/iam/google//modules/bigquery_datasets_iam"
-  version = "~> 8.0"
-
-  project = var.project
-  bigquery_datasets = [
-    local.dataset_id,
-    "${local.dataset_id}_assertions"
+  access = [
+    {
+      role          = "OWNER"
+      special_group = "projectOwners"
+    },
+    {
+      role          = "WRITER"
+      user_by_email = module.service_accounts.email
+    }
   ]
-  mode = "additive"
-
-  bindings = {
-    "roles/bigquery.dataEditor" = module.service_accounts.iam_emails_list
-    #     "roles/bigquery.dataViewer" = [
-    # "serviceAccount:service-${data.google_project.default.number}@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
-    # ]
-  }
 }
 
 resource "google_bigquery_data_transfer_config" "binance_transactions" {
@@ -51,11 +227,47 @@ resource "google_bigquery_data_transfer_config" "binance_transactions" {
   schedule               = "first sunday of quarter 00:00"
   destination_dataset_id = local.dataset_id
   params = {
-    destination_table_name_template = "binance_transactions"
-    data_path_template              = "${module.cloud_storage.url}/*.csv"
+    destination_table_name_template = module.bigquery.table_ids[0]
+    data_path_template              = "${module.cloud_storage.urls["binance-exports"]}/*.csv"
     write_disposition               = "APPEND"
     file_format                     = "CSV"
     skip_leading_rows               = 1
+  }
+  service_account_name = module.service_accounts.email
+}
+
+resource "google_bigquery_data_transfer_config" "sg_current" {
+  project                = var.project
+  location               = var.location
+  data_source_id         = "google_cloud_storage"
+  display_name           = "${var.display_name} SG Current Account"
+  schedule               = "first sunday of quarter 00:00"
+  destination_dataset_id = local.dataset_id
+  params = {
+    destination_table_name_template = module.bigquery.table_ids[1]
+    data_path_template              = "${module.cloud_storage.urls["sg-exports"]}/current/*.csv"
+    write_disposition               = "APPEND"
+    file_format                     = "CSV"
+    skip_leading_rows               = 3
+    field_delimiter                 = ";"
+  }
+  service_account_name = module.service_accounts.email
+}
+
+resource "google_bigquery_data_transfer_config" "sg_saving" {
+  project                = var.project
+  location               = var.location
+  data_source_id         = "google_cloud_storage"
+  display_name           = "${var.display_name} SG Saving Accounts"
+  schedule               = "first sunday of quarter 00:00"
+  destination_dataset_id = local.dataset_id
+  params = {
+    destination_table_name_template = module.bigquery.table_ids[2]
+    data_path_template              = "${module.cloud_storage.urls["sg-exports"]}/saving/*.csv"
+    write_disposition               = "APPEND"
+    file_format                     = "CSV"
+    skip_leading_rows               = 2
+    field_delimiter                 = ";"
   }
   service_account_name = module.service_accounts.email
 }
