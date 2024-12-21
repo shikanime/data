@@ -2,5 +2,5 @@ config {
   type: "declaration",
   database: "shikanime-studio-labs",
   schema: "seeker",
-  name: "binance_transactions_source"
+  name: "binance_transactions_exports"
 }
