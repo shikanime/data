@@ -11,6 +11,80 @@ module "bigquery" {
   description  = var.description
   project_id   = var.project
   location     = var.location
+
+  external_tables = [
+    {
+      table_id = "binance_transactions_source",
+      description = "Binance transactions source",
+      autodetect = false,
+      compression = null,
+      ignore_unknown_values = false,
+      max_bad_records = null,
+      expiration_time = null,
+      google_sheets_options = null,
+      source_format = "CSV",
+      source_uris = [
+        "${module.cloud_storage.urls["binance-exports"]}/*.csv"
+      ],
+      csv_options = {
+        skip_leading_rows = 1,
+        allow_quoted_newlines = false,
+        allow_jagged_rows = false,
+        encoding = "UTF-8",
+        field_delimiter = ",",
+        quote = "\"",
+      },
+      hive_partitioning_options = {
+        mode = "AUTO"
+        source_uri_prefix = "${module.cloud_storage.urls["binance-exports"]}/"
+      }
+      schema = jsonencode([
+        {
+          name : "User_ID",
+          type : "STRING",
+          mode : "REQUIRED",
+          description : "The user ID of the transaction"
+        },
+        {
+          name : "UTC_Time",
+          type : "TIMESTAMP",
+          mode : "REQUIRED",
+          description : "The timestamp when the transaction occurred"
+        },
+        {
+          name : "Account",
+          type : "STRING",
+          mode : "REQUIRED",
+          description : "The account where the transaction occurred"
+        },
+        {
+          name : "Operation",
+          type : "STRING",
+          mode : "REQUIRED",
+          description : "The transaction operation type"
+        },
+        {
+          name : "Coin",
+          type : "STRING",
+          mode : "REQUIRED",
+          description : "The cryptocurrency symbol"
+        },
+        {
+          name : "Change",
+          type : "FLOAT64",
+          mode : "REQUIRED",
+          description : "The transaction amount"
+        },
+        {
+          name : "Remark",
+          type : "STRING",
+          mode : "REQUIRED",
+          description : "Additional transaction remarks"
+        }
+      ]),
+      labels = {}
+    }
+  ]
 }
 
 module "bigquery_assertions" {
