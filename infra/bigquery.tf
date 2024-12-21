@@ -82,12 +82,12 @@ module "bigquery" {
       require_partition_filter = true
       time_partitioning = {
         expiration_ms = null
-        field = "UTC_Time"
-        type  = "DAY"
+        field         = "UTC_Time"
+        type          = "DAY"
       }
       range_partitioning = null
       expiration_time    = null
-      labels = {}
+      labels             = {}
     },
     {
       table_id    = "sg_current_transactions"
@@ -123,24 +123,14 @@ module "bigquery" {
           type        = "STRING"
           mode        = "REQUIRED"
           description = "Currency code"
-        },
-        {
-          name        = "date"
-          type        = "DATE"
-          mode        = "REQUIRED"
-          description = "Parsed date of the transaction"
         }
       ])
-      clustering = []
+      clustering               = []
       require_partition_filter = false
-      time_partitioning = {
-        expiration_ms = null
-        field = "date"
-        type  = "DAY"
-      }
-      range_partitioning = null
-      expiration_time    = null
-      labels = {}
+      time_partitioning        = null
+      range_partitioning       = null
+      expiration_time          = null
+      labels                   = {}
     },
     {
       table_id    = "sg_saving_transactions"
@@ -170,30 +160,14 @@ module "bigquery" {
           type        = "STRING"
           mode        = "REQUIRED"
           description = "Currency code"
-        },
-        {
-          name        = "date"
-          type        = "DATE"
-          mode        = "REQUIRED"
-          description = "Parsed date of the transaction"
-        },
-        {
-          name        = "account"
-          type        = "STRING"
-          mode        = "REQUIRED"
-          description = "Savings account identifier"
         }
       ])
-      clustering = ["account"]
+      clustering               = []
       require_partition_filter = false
-      time_partitioning = {
-        expiration_ms = null
-        field = "date"
-        type  = "DAY"
-      }
-      range_partitioning = null
-      expiration_time    = null
-      labels = {}
+      time_partitioning        = null
+      range_partitioning       = null
+      expiration_time          = null
+      labels                   = {}
     }
   ]
 }
