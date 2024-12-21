@@ -1,5 +1,5 @@
 {
-  "name": "shikanime",
+  "name": "@shikanime/seeker",
   "version": "0.1.0",
   "description": "Shikanime Studio Data Platform",
   "private": true,

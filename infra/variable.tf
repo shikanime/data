@@ -1,18 +1,18 @@
 variable "name" {
   type        = string
-  default     = "shikanime"
+  default     = "seeker"
   description = "Name"
 }
 
 variable "display_name" {
   type        = string
-  default     = "Shikanime Studio Data Platform"
+  default     = "Seeker Data Platform"
   description = "Human readable name"
 }
 
 variable "description" {
   type        = string
-  default     = "Shikanime Studio Data Platform"
+  default     = "Seeker Data Platform"
   description = "Description"
 }
 
