@@ -1,0 +1,21 @@
+config {
+  type: "operations",
+  database: "shikanime-studio-labs",
+  schema: "seeker",
+  name: "binance_transactions_source",
+  hasOutput: true
+}
+
+LOAD DATA INTO
+  ${self()} ( User_ID STRING,
+    UTC_Time TIMESTAMP,
+    Account STRING,
+    Operation STRING,
+    Coin STRING,
+    Change FLOAT64,
+    Remark STRING )
+FROM FILES ( format = 'CSV',
+    uris = ['${dataform.projectConfig.vars.binanceExportsBucketUri}/*.csv'],
+    hive_partition_uri_prefix='${dataform.projectConfig.vars.binanceExportsBucketUri}/',
+    skip_leading_rows = 1)
+WITH PARTITION COLUMNS( date DATE )
