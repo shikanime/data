@@ -1,0 +1,12 @@
+config {
+  type: "operations",
+  database: "shikanime-studio-labs",
+  schema: "shikanime",
+  name: "societe_generale_account"
+  hasOutput: true
+}
+
+LOAD DATA OVERWRITE
+  ${self()} ( )
+FROM FILES ( format = 'CSV',
+    uris = ['gs://${database()}/societe-generate/account/*.csv'] );
