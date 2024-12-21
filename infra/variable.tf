@@ -1,18 +1,18 @@
 variable "name" {
   type        = string
-  default     = "data-platform-poc"
+  default     = "shikanime"
   description = "Name"
 }
 
 variable "display_name" {
   type        = string
-  default     = "Data Platform POC"
+  default     = "Shikanime Studio Data Platform"
   description = "Human readable name"
 }
 
 variable "description" {
   type        = string
-  default     = "Data Platform POC"
+  default     = "Shikanime Studio Data Platform"
   description = "Description"
 }
 
@@ -37,5 +37,5 @@ variable "location" {
 variable "repository" {
   type        = string
   description = "Name of the repository"
-  default     = "infinity-blackhole/data-platform-poc"
+  default     = "shikanime/data"
 }

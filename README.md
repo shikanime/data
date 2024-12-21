@@ -1,33 +1,9 @@
-# Data Platform POC
+<!-- markdownlint-disable first-line-heading -->
 
-This project demonstrates a data platform POC using Dataform and BigQuery.
+![header.png](https://raw.githubusercontent.com/shikanime/shikanime/main/assets/github-header.png)
 
-# Getting Started
+<!-- markdownlint-enable first-line-heading -->
 
-## Prerequisites
+## Data Platform
 
-To run this project, you will need the following:
-
-- Node v20.18 or higher
-- Npm v10.8 or higher
-- OpenTofu v1.8 or higher
-
-or you can use [direnv](https://direnv.net/) and [Nix](https://nixos.org/)
-
-```shell
-direnv allow
-```
-
-## Development
-
-Install dependencies:
-
-```shell
-npm install
-```
-
-Run the Dataform project:
-
-```shell
-npx @dataform/cli run
-```
+Hey 🌸 I'm Shikanime Deva, this is my data platform.

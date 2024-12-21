@@ -1,11 +1,11 @@
 {
-  "name": "data-platform-poc",
+  "name": "shikanime",
   "version": "0.1.0",
-  "description": "Data Platform POC",
+  "description": "Shikanime Studio Data Platform",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/infinity-blackhole/data-platform-poc.git"
+    "url": "https://github.com/shikanime/data.git"
   },
   "author": "engineering@shikanime.studio",
   "license": "MIT",
