@@ -34,4 +34,4 @@ SELECT
   Change AS change,
   Coin AS symbol
 FROM
-  ${ref("binance_transactions_source")}
+  ${ref("binance_transactions_exports")}

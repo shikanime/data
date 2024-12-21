@@ -28,4 +28,4 @@ SELECT
   montant_operation AS change,
   devise AS symbol
 FROM
-  ${ref("sg_saving_transactions_source")}
+  ${ref("sg_saving_transactions_exports")}
