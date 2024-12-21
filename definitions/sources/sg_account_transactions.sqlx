@@ -12,19 +12,18 @@ config {
   },
   assertions: {
     nonNull: [
-      "date",
+      "time",
       "label",
-      "amount",
-      "currency"
+      "change",
+      "symbol"
     ]
   }
 }
 
 SELECT
-  PARSE_DATE('%d/%m/%Y', date_de_l_operation) AS date,
-  libelle AS label,
-  detail_de_l_ecriture AS description,
-  montant_de_l_operation AS amount,
-  devise AS currency
+  TIMESTAMP(PARSE_DATE('%d/%m/%Y', date_de_l_operation), 'Europe/Paris') AS time,
+  libelle AS label,  detail_de_l_ecriture AS description,
+  montant_de_l_operation AS change,
+  devise AS symbol
 FROM
   ${ref("sg_account_transactions_source")}
