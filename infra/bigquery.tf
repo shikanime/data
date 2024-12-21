@@ -134,7 +134,7 @@ module "bigquery" {
       description           = null,
       autodetect            = false,
       compression           = null,
-      ignore_unknown_values = false,
+      ignore_unknown_values = true,
       max_bad_records       = null,
       expiration_time       = null,
       google_sheets_options = null,
