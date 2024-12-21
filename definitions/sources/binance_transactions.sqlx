@@ -1,37 +1,6 @@
 config {
-  type: "view",
+  type: "declaration",
   database: "shikanime-studio-labs",
   schema: "seeker",
-  name: "binance_transactions",
-  columns: {
-    user_id: "The user ID of the transaction",
-    account: "The account where the transaction occurred",
-    time: "The date when the transaction occurred",
-    label: "The transaction label or category",
-    description: "Detailed description of the transaction",
-    change: "The transaction amount",
-    symbol: "The currency or asset symbol of the transaction"
-  },
-  assertions: {
-    nonNull: [
-      "user_id",
-      "account",
-      "time",
-      "label",
-      "description",
-      "change",
-      "symbol"
-    ]
-  }
+  name: "binance_transactions"
 }
-
-SELECT
-  User_ID AS user_id,
-  Account AS account,
-  UTC_Time AS time,
-  Operation AS label,
-  Remark AS description,
-  Change AS change,
-  Coin AS symbol
-FROM
-  ${ref("binance_transactions_source")}

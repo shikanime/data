@@ -1,0 +1,22 @@
+config {
+  type: "view",
+  database: "shikanime-studio-labs",
+  schema: "seeker",
+  name: "sg_current_transactions_consolidation",
+  columns: {
+    time: "The date when the transaction occurred",
+    label: "The transaction label or category",
+    description: "Detailed description of the transaction",
+    change: "The transaction amount",
+    symbol: "The currency or asset symbol of the transaction"
+  }
+}
+
+SELECT
+  TIMESTAMP(PARSE_DATE('%d/%m/%Y', date_de_l_operation), 'Europe/Paris') AS time,
+  libelle AS label,
+  detail_de_l_ecriture AS description,
+  montant_de_l_operation AS change,
+  devise AS symbol
+FROM
+  ${ref("sg_current_transactions")}

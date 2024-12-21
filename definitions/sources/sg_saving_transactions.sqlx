@@ -1,31 +1,6 @@
 config {
-  type: "view",
+  type: "declaration",
   database: "shikanime-studio-labs",
   schema: "seeker",
-  name: "sg_saving_transactions",
-  columns: {
-    time: "The date when the transaction occurred",
-    account: "The account where the transaction occurred",
-    label: "The transaction label or category",
-    change: "The transaction amount",
-    symbol: "The currency or asset symbol of the transaction"
-  },
-  assertions: {
-    nonNull: [
-      "time",
-      "account",
-      "label",
-      "change",
-      "symbol"
-    ]
-  }
+  name: "sg_saving_transactions"
 }
-
-SELECT
-  TIMESTAMP(PARSE_DATE('%d/%m/%Y', date_comptabilisation), 'Europe/Paris') AS time,
-  account,
-  libelle_complet_operation AS label,
-  montant_operation AS change,
-  devise AS symbol
-FROM
-  ${ref("sg_saving_transactions_source")}
