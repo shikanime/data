@@ -23,7 +23,7 @@ config {
 
 SELECT
   TIMESTAMP(PARSE_DATE('%d/%m/%Y', date_comptabilisation), 'Europe/Paris') AS time,
-  account,
+  _export_account AS account,
   libelle_complet_operation AS label,
   montant_operation AS change,
   devise AS symbol
