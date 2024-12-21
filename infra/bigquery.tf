@@ -28,12 +28,18 @@ module "bigquery_datasets_iam" {
   source  = "terraform-google-modules/iam/google//modules/bigquery_datasets_iam"
   version = "~> 8.0"
 
-  project            = var.project
-  bigquery_datasets  = [module.bigquery.dataset_id, module.bigquery_assertions.dataset_id]
-  mode               = "additive"
+  project = var.project
+  bigquery_datasets = [
+    local.dataset_id,
+    "${local.dataset_id}_assertions"
+  ]
+  mode = "additive"
 
   bindings = {
-    "roles/bigquery.dataEditor" = module.service_accounts.emails_list
+    "roles/bigquery.dataEditor" = module.service_accounts.iam_emails_list
+    #     "roles/bigquery.dataViewer" = [
+    # "serviceAccount:service-${data.google_project.default.number}@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
+    # ]
   }
 }
 
@@ -48,8 +54,8 @@ resource "google_bigquery_data_transfer_config" "binance_transactions" {
     destination_table_name_template = "binance_transactions"
     data_path_template              = "${module.cloud_storage.url}/*.csv"
     write_disposition               = "APPEND"
-    file_format                 = "CSV"
-    skip_leading_rows = 1
+    file_format                     = "CSV"
+    skip_leading_rows               = 1
   }
   service_account_name = module.service_accounts.email
 }
