@@ -13,6 +13,7 @@ config {
   assertions: {
     nonNull: [
       "user_id",
+      "account",
       "time",
       "label",
       "change",
@@ -23,10 +24,11 @@ config {
 
 SELECT
   User_ID AS user_id,
+  Account AS account,
   UTC_Time AS time,
   Operation AS label,
   Remark AS description,
   Change AS change,
   Coin AS symbol
 FROM
-  ${ref("binance_account_transactions_source")}
+  ${ref("binance_transactions_source")}

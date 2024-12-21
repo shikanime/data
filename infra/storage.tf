@@ -10,7 +10,7 @@ module "cloud_storage" {
     "binance-datalake",
   ]
   versioning = {
-    "sg-datalake" = true
+    "sg-datalake"      = true
     "binance-datalake" = true
   }
   viewers = module.service_accounts.emails_list

@@ -13,6 +13,7 @@ config {
   assertions: {
     nonNull: [
       "time",
+      "account",
       "label",
       "change",
       "symbol"
@@ -22,6 +23,7 @@ config {
 
 SELECT
   TIMESTAMP(PARSE_DATE('%d/%m/%Y', date_de_l_operation), 'Europe/Paris') AS time,
+  "current" AS account,
   libelle AS label,  detail_de_l_ecriture AS description,
   montant_de_l_operation AS change,
   devise AS symbol
