@@ -16,7 +16,8 @@ config {
       "account",
       "label",
       "change",
-      "symbol"
+      "symbol",
+      "source"
     ]
   }
 }
@@ -26,6 +27,7 @@ SELECT
   "current" AS account,
   libelle AS label,  detail_de_l_ecriture AS description,
   montant_de_l_operation AS change,
-  devise AS symbol
+  devise AS symbol,
+  "sg" AS source
 FROM
   ${ref("sg_account_transactions_source")}
