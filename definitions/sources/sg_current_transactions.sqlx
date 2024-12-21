@@ -4,17 +4,20 @@ config {
   schema: "seeker",
   name: "sg_current_transactions",
   columns: {
-    date: "The date when the transaction occurred",
+    time: "The date when the transaction occurred",
+    account: "The account where the transaction occurred",
     label: "The transaction label or category",
     description: "Detailed description of the transaction",
-    amount: "The transaction amount",
-    currency: "The currency of the transaction"
+    change: "The transaction amount",
+    symbol: "The currency or asset symbol of the transaction",
+    source: "The source of the transaction"
   },
   assertions: {
     nonNull: [
       "time",
       "account",
       "label",
+      "description",
       "change",
       "symbol",
       "source"
@@ -29,6 +32,6 @@ SELECT
   detail_de_l_ecriture AS description,
   montant_de_l_operation AS change,
   devise AS symbol,
-  "sg" AS SOURCE
+  "sg" AS source
 FROM
   ${ref("sg_current_transactions_source")}
