@@ -1,4 +1,4 @@
 defaultProject: shikanime-studio-labs
 defaultLocation: EU
-defaultDataset: data_platform
-defaultAssertionDataset: data_platform_assertions
+defaultDataset: shikanime
+defaultAssertionDataset: shikanime_assertions
