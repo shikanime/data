@@ -5,33 +5,27 @@ config {
   name: "sg_current_transactions",
   columns: {
     time: "The date when the transaction occurred",
-    account: "The account where the transaction occurred",
     label: "The transaction label or category",
     description: "Detailed description of the transaction",
     change: "The transaction amount",
-    symbol: "The currency or asset symbol of the transaction",
-    source: "The source of the transaction"
+    symbol: "The currency or asset symbol of the transaction"
   },
   assertions: {
     nonNull: [
       "time",
-      "account",
       "label",
       "description",
       "change",
-      "symbol",
-      "source"
+      "symbol"
     ]
   }
 }
 
 SELECT
   TIMESTAMP(PARSE_DATE('%d/%m/%Y', date_de_l_operation), 'Europe/Paris') AS time,
-  "current" AS account,
   libelle AS label,
   detail_de_l_ecriture AS description,
   montant_de_l_operation AS change,
-  devise AS symbol,
-  "sg" AS source
+  devise AS symbol
 FROM
   ${ref("sg_current_transactions_source")}

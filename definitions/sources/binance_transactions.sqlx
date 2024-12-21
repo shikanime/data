@@ -10,8 +10,7 @@ config {
     label: "The transaction label or category",
     description: "Detailed description of the transaction",
     change: "The transaction amount",
-    symbol: "The currency or asset symbol of the transaction",
-    source: "The source of the transaction"
+    symbol: "The currency or asset symbol of the transaction"
   },
   assertions: {
     nonNull: [
@@ -21,8 +20,7 @@ config {
       "label",
       "description",
       "change",
-      "symbol",
-      "source"
+      "symbol"
     ]
   }
 }
@@ -34,7 +32,6 @@ SELECT
   Operation AS label,
   Remark AS description,
   Change AS change,
-  Coin AS symbol,
-  "binance" AS source
+  Coin AS symbol
 FROM
   ${ref("binance_transactions_source")}

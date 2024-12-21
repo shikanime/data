@@ -7,10 +7,8 @@ config {
     time: "The date when the transaction occurred",
     account: "The account where the transaction occurred",
     label: "The transaction label or category",
-    description: "Detailed description of the transaction",
     change: "The transaction amount",
-    symbol: "The currency or asset symbol of the transaction",
-    source: "The source of the transaction"
+    symbol: "The currency or asset symbol of the transaction"
   },
   assertions: {
     nonNull: [
@@ -18,8 +16,7 @@ config {
       "account",
       "label",
       "change",
-      "symbol",
-      "source"
+      "symbol"
     ]
   }
 }
@@ -29,7 +26,6 @@ SELECT
   account,
   libelle_complet_operation AS label,
   montant_operation AS change,
-  devise AS symbol,
-  "sg" AS source
+  devise AS symbol
 FROM
   ${ref("sg_saving_transactions_source")}
