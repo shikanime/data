@@ -1,18 +1,18 @@
 variable "name" {
   type        = string
-  default     = "shikanime"
+  default     = "seeker"
   description = "Name"
 }
 
 variable "display_name" {
   type        = string
-  default     = "Shikanime Studio Data Platform"
+  default     = "Seeker Data Platform"
   description = "Human readable name"
 }
 
 variable "description" {
   type        = string
-  default     = "Shikanime Studio Data Platform"
+  default     = "Seeker Data Platform"
   description = "Description"
 }
 
@@ -25,13 +25,13 @@ variable "project" {
 variable "region" {
   type        = string
   description = "Google Cloud region"
-  default     = "europe-west3"
+  default     = "europe-west9"
 }
 
 variable "location" {
   type        = string
   description = "Google Cloud region or multi-region"
-  default     = "EU"
+  default     = "europe-west9"
 }
 
 variable "repository" {

@@ -4,6 +4,6 @@
 
 <!-- markdownlint-enable first-line-heading -->
 
-## Data Platform
+## Seeker
 
 Hey 🌸 I'm Shikanime Deva, this is my data platform.

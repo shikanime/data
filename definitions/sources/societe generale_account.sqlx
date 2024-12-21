@@ -2,18 +2,16 @@ config {
   type: "operations",
   database: "shikanime-studio-labs",
   schema: "shikanime",
-  name: "societe_generale_account"
-  hasOutput: true
+  name: "societe_generale_account",
+  hasOutput: true,
 }
 
-LOAD DATA
-  ${self()} (
-    date_de_l_operation DATE,
+  LOAD DATA ${self()} ( date_de_l_operation DATE,
     libelle STRING,
     detail_de_l_ecriture STRING,
     montant_de_l_operation FLOAT,
-    devise STRING   )
+    devise STRING )
 FROM FILES ( format = 'CSV',
-    uris = ['gs://${database()}/societe-generate/account/*.csv'],
-    hive_partition_uri_prefix='gs://${database()}/societe-generate/account/' );
-WITH PARTITION COLUMNS
+    uris = ['gs://${database()}/societe-generale-datalake/account/*.csv'],
+    hive_partition_uri_prefix='gs://${database()}/societe-generale-datalake/account/' )
+WITH PARTITION COLUMNS( _HIVE_PARTITION_TS TIMESTAMP )
