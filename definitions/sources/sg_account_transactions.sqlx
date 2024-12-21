@@ -1,0 +1,30 @@
+config {
+  type: "view",
+  database: "shikanime-studio-labs",
+  schema: "seeker",
+  name: "sg_account_transactions",
+  columns: {
+    date: "The date when the transaction occurred",
+    label: "The transaction label or category",
+    description: "Detailed description of the transaction",
+    amount: "The transaction amount",
+    currency: "The currency of the transaction"
+  },
+  assertions: {
+    nonNull: [
+      "date",
+      "label",
+      "amount",
+      "currency"
+    ]
+  }
+}
+
+SELECT
+  PARSE_DATE('%d/%m/%Y', date_de_l_operation) AS date,
+  libelle AS label,
+  detail_de_l_ecriture AS description,
+  montant_de_l_operation AS amount,
+  devise AS currency
+FROM
+  ${ref("sg_account_transactions_source")}

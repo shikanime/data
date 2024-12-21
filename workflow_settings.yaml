@@ -1,4 +1,6 @@
 defaultProject: shikanime-studio-labs
-defaultLocation: EU
-defaultDataset: shikanime
-defaultAssertionDataset: shikanime_assertions
+defaultLocation: europe-west9
+defaultDataset: seeker
+defaultAssertionDataset: seeker_assertions
+vars:
+  sgDatalakeBucketUri: gs://shikanime-studio-labs-seeker-europe-west9-sg-datalake
