@@ -6,13 +6,13 @@ variable "name" {
 
 variable "display_name" {
   type        = string
-  default     = "Shikanime Studio Data Platform"
+  default     = "Shikanime Data Platform"
   description = "Human readable name"
 }
 
 variable "description" {
   type        = string
-  default     = "Shikanime Studio Data Platform"
+  default     = "Shikanime Data Platform"
   description = "Description"
 }
 
