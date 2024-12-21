@@ -1,21 +1,6 @@
 config {
-  type: "operations",
+  type: "declaration",
   database: "shikanime-studio-labs",
   schema: "seeker",
-  name: "sg_saving_transactions_source",
-  hasOutput: true
+  name: "sg_saving_transactions_source"
 }
-
-LOAD DATA INTO
-  ${self()} ( date_comptabilisation STRING,
-    libelle_complet_operation STRING,
-    montant_operation FLOAT64,
-    devise STRING )
-FROM FILES ( format = 'CSV',
-    uris = ['${dataform.projectConfig.vars.sgExportsBucketUri}/saving/*.csv'],
-    hive_partition_uri_prefix='${dataform.projectConfig.vars.sgExportsBucketUri}/saving/',
-    skip_leading_rows = 2,
-    ignore_unknown_values = TRUE,
-    field_delimiter = ';')
-WITH PARTITION COLUMNS( date DATE,
-    account STRING )

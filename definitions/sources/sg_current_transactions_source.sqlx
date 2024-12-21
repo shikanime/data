@@ -1,20 +1,6 @@
 config {
-  type: "operations",
+  type: "declaration",
   database: "shikanime-studio-labs",
   schema: "seeker",
-  name: "sg_current_transactions_source",
-  hasOutput: true
+  name: "sg_current_transactions_source"
 }
-
-LOAD DATA INTO
-  ${self()} ( date_de_l_operation STRING,
-    libelle STRING,
-    detail_de_l_ecriture STRING,
-    montant_de_l_operation FLOAT64,
-    devise STRING )
-FROM FILES ( format = 'CSV',
-    uris = ['${dataform.projectConfig.vars.sgExportsBucketUri}/current/*.csv'],
-    hive_partition_uri_prefix='${dataform.projectConfig.vars.sgExportsBucketUri}/current/',
-    skip_leading_rows = 3,
-    field_delimiter = ';')
-WITH PARTITION COLUMNS( date DATE )

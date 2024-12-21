@@ -14,72 +14,164 @@ module "bigquery" {
 
   external_tables = [
     {
-      table_id = "binance_transactions_source",
-      description = "Binance transactions source",
-      autodetect = false,
-      compression = null,
+      table_id              = "binance_transactions_source",
+      description           = "Binance transactions source",
+      autodetect            = false,
+      compression           = null,
       ignore_unknown_values = false,
-      max_bad_records = null,
-      expiration_time = null,
+      max_bad_records       = null,
+      expiration_time       = null,
       google_sheets_options = null,
-      source_format = "CSV",
+      source_format         = "CSV",
       source_uris = [
         "${module.cloud_storage.urls["binance-exports"]}/*.csv"
       ],
       csv_options = {
-        skip_leading_rows = 1,
+        skip_leading_rows     = 1,
         allow_quoted_newlines = false,
-        allow_jagged_rows = false,
-        encoding = "UTF-8",
-        field_delimiter = ",",
-        quote = "\"",
+        allow_jagged_rows     = false,
+        encoding              = "UTF-8",
+        field_delimiter       = ",",
+        quote                 = "\"",
       },
       hive_partitioning_options = {
-        mode = "AUTO"
+        mode              = "AUTO"
         source_uri_prefix = "${module.cloud_storage.urls["binance-exports"]}/"
       }
       schema = jsonencode([
         {
           name : "User_ID",
           type : "STRING",
-          mode : "REQUIRED",
-          description : "The user ID of the transaction"
+          mode : "REQUIRED"
         },
         {
           name : "UTC_Time",
           type : "TIMESTAMP",
-          mode : "REQUIRED",
-          description : "The timestamp when the transaction occurred"
+          mode : "REQUIRED"
         },
         {
           name : "Account",
           type : "STRING",
-          mode : "REQUIRED",
-          description : "The account where the transaction occurred"
+          mode : "REQUIRED"
         },
         {
           name : "Operation",
           type : "STRING",
-          mode : "REQUIRED",
-          description : "The transaction operation type"
+          mode : "REQUIRED"
         },
         {
           name : "Coin",
           type : "STRING",
-          mode : "REQUIRED",
-          description : "The cryptocurrency symbol"
+          mode : "REQUIRED"
         },
         {
           name : "Change",
           type : "FLOAT64",
-          mode : "REQUIRED",
-          description : "The transaction amount"
+          mode : "REQUIRED"
         },
         {
           name : "Remark",
           type : "STRING",
-          mode : "REQUIRED",
-          description : "Additional transaction remarks"
+          mode : "REQUIRED"
+        }
+      ]),
+      labels = {}
+    },
+    {
+      table_id              = "sg_current_transactions_source",
+      description           = null,
+      autodetect            = false,
+      compression           = null,
+      ignore_unknown_values = false,
+      max_bad_records       = null,
+      expiration_time       = null,
+      google_sheets_options = null,
+      source_format         = "CSV",
+      source_uris           = ["${module.cloud_storage.urls["sg-exports"]}/current/*.csv"],
+      csv_options = {
+        quote                 = ""
+        skip_leading_rows     = 3
+        field_delimiter       = ";"
+        allow_quoted_newlines = false
+        allow_jagged_rows     = false
+        encoding              = "UTF-8"
+      },
+      hive_partitioning_options = {
+        mode              = "AUTO"
+        source_uri_prefix = "${module.cloud_storage.urls["sg-exports"]}/current/"
+      },
+      schema = jsonencode([
+        {
+          name : "date_de_l_operation",
+          type : "STRING",
+          mode : "REQUIRED"
+        },
+        {
+          name : "libelle",
+          type : "STRING",
+          mode : "REQUIRED"
+        },
+        {
+          name : "detail_de_l_ecriture",
+          type : "STRING",
+          mode : "REQUIRED"
+        },
+        {
+          name : "montant_de_l_operation",
+          type : "FLOAT64",
+          mode : "REQUIRED"
+        },
+        {
+          name : "devise",
+          type : "STRING",
+          mode : "REQUIRED"
+        }
+      ]),
+      labels = {}
+    },
+    {
+      table_id              = "sg_saving_transactions_source",
+      description           = null,
+      autodetect            = false,
+      compression           = null,
+      ignore_unknown_values = false,
+      max_bad_records       = null,
+      expiration_time       = null,
+      google_sheets_options = null,
+      source_format         = "CSV",
+      source_uris           = ["${module.cloud_storage.urls["sg-exports"]}/saving/*.csv"],
+      csv_options = {
+        quote                 = ""
+        skip_leading_rows     = 2
+        field_delimiter       = ";"
+        allow_quoted_newlines = false
+        allow_jagged_rows     = false
+        encoding              = "UTF-8"
+      },
+      hive_partitioning_options = {
+        mode              = "AUTO"
+        source_uri_prefix = "${module.cloud_storage.urls["sg-exports"]}/saving/"
+      },
+      schema = jsonencode([
+        {
+          name : "date_comptabilisation",
+          type : "STRING",
+          mode : "REQUIRED"
+        },
+        {
+          name : "libelle_complet_operation",
+          type : "STRING",
+          mode : "REQUIRED"
+        },
+        {
+          name : "montant_operation",
+          type : "FLOAT64",
+          mode : "REQUIRED"
+        },
+        {
+          name : "devise",
+          type : "STRING",
+          mode : "REQUIRED"
         }
       ]),
       labels = {}
