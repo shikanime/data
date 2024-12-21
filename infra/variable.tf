@@ -25,13 +25,13 @@ variable "project" {
 variable "region" {
   type        = string
   description = "Google Cloud region"
-  default     = "europe-west3"
+  default     = "europe-west9"
 }
 
 variable "location" {
   type        = string
   description = "Google Cloud region or multi-region"
-  default     = "EU"
+  default     = "europe-west9"
 }
 
 variable "repository" {
