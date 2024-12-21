@@ -6,7 +6,7 @@ module "cloud_storage" {
   location   = var.location
   prefix     = "${var.project}-${var.name}-${lower(var.location)}"
   names = [
-    "sg-datalake",
+    "sg-exports",
   ]
   versioning = {
     "sg-datalake" = true
