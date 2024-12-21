@@ -3,5 +3,5 @@ defaultLocation: europe-west9
 defaultDataset: seeker
 defaultAssertionDataset: seeker_assertions
 vars:
-  sgDatalakeBucketUri: gs://shikanime-studio-labs-seeker-europe-west9-sg-datalake
-  binanceDatalakeBucketUri: gs://shikanime-studio-labs-seeker-europe-west9-binance-datalake
+  sgExportsBucketUri: gs://shikanime-studio-labs-seeker-europe-west9-sg-exports
+  binanceExportsBucketUri: gs://shikanime-studio-labs-seeker-europe-west9-binance-exports

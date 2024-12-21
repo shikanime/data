@@ -2,7 +2,7 @@ config {
   type: "operations",
   database: "shikanime-studio-labs",
   schema: "seeker",
-  name: "binance_account_transactions_source",
+  name: "binance_transactions_source",
   hasOutput: true
 }
 
@@ -15,7 +15,7 @@ LOAD DATA INTO
     Change FLOAT64,
     Remark STRING )
 FROM FILES ( format = 'CSV',
-    uris = ['${dataform.projectConfig.vars.binanceDatalakeBucketUri}/*.csv'],
-    hive_partition_uri_prefix='${dataform.projectConfig.vars.binanceDatalakeBucketUri}/',
+    uris = ['${dataform.projectConfig.vars.binanceExportsBucketUri}/*.csv'],
+    hive_partition_uri_prefix='${dataform.projectConfig.vars.binanceExportsBucketUri}/',
     skip_leading_rows = 1)
-WITH PARTITION COLUMNS( dt DATE )
+WITH PARTITION COLUMNS( date DATE )

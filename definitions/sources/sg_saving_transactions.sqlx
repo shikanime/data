@@ -2,7 +2,7 @@ config {
   type: "view",
   database: "shikanime-studio-labs",
   schema: "seeker",
-  name: "sg_current_transactions",
+  name: "sg_saving_transactions",
   columns: {
     date: "The date when the transaction occurred",
     label: "The transaction label or category",
@@ -23,12 +23,11 @@ config {
 }
 
 SELECT
-  TIMESTAMP(PARSE_DATE('%d/%m/%Y', date_de_l_operation), 'Europe/Paris') AS time,
-  "current" AS account,
-  libelle AS label,
-  detail_de_l_ecriture AS description,
-  montant_de_l_operation AS change,
+  TIMESTAMP(PARSE_DATE('%d/%m/%Y', date_comptabilisation), 'Europe/Paris') AS time,
+  account,
+  libelle_complet_operation AS label,
+  montant_operation AS change,
   devise AS symbol,
   "sg" AS SOURCE
 FROM
-  ${ref("sg_current_transactions_source")}
+  ${ref("sg_saving_transactions_source")}

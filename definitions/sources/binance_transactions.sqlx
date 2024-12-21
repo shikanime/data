@@ -2,7 +2,7 @@ config {
   type: "view",
   database: "shikanime-studio-labs",
   schema: "seeker",
-  name: "binance_account_transactions",
+  name: "binance_transactions",
   columns: {
     date: "The date when the transaction occurred",
     label: "The transaction label or category",
@@ -31,6 +31,6 @@ SELECT
   Remark AS description,
   Change AS change,
   Coin AS symbol,
-  "binance" AS source
+  "binance" AS SOURCE
 FROM
   ${ref("binance_transactions_source")}
