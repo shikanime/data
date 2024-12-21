@@ -12,6 +12,6 @@ config {
     montant_de_l_operation FLOAT,
     devise STRING )
 FROM FILES ( format = 'CSV',
-    uris = ['gs://${database()}/societe-generale-datalake/account/*.csv'],
-    hive_partition_uri_prefix='gs://${database()}/societe-generale-datalake/account/' )
+    uris = ['gs://${database()}/sg-datalake/account/*.csv'],
+    hive_partition_uri_prefix='gs://${database()}/sg-datalake/account/' )
 WITH PARTITION COLUMNS( _HIVE_PARTITION_TS TIMESTAMP )
