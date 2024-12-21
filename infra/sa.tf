@@ -7,8 +7,7 @@ module "service_accounts" {
   names        = ["workflow"]
   display_name = "${var.display_name} Workflow Service Account"
   project_roles = [
-    "${var.project}=>roles/bigquery.jobUser",
-    "${var.project}=>roles/bigquery.dataEditor"
+    "${var.project}=>roles/bigquery.jobUser"
   ]
 }
 

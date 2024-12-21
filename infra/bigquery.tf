@@ -24,6 +24,22 @@ module "bigquery_assertions" {
   location     = var.location
 }
 
+module "bigquery_datasets_iam" {
+  source  = "terraform-google-modules/iam/google//modules/bigquery_datasets_iam"
+  version = "~> 8.0"
+
+  project = var.project
+  bigquery_datasets = [
+    local.dataset_id,
+    "${local.dataset_id}_assertions"
+  ]
+  mode = "additive"
+
+  bindings = {
+    "roles/bigquery.dataEditor" = module.service_accounts.iam_emails_list
+  }
+}
+
 resource "google_dataform_repository" "default" {
   provider = google-beta
 
