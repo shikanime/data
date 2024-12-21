@@ -4,11 +4,14 @@ config {
   schema: "seeker",
   name: "binance_transactions",
   columns: {
-    date: "The date when the transaction occurred",
+    user_id: "The user ID of the transaction",
+    account: "The account where the transaction occurred",
+    time: "The date when the transaction occurred",
     label: "The transaction label or category",
     description: "Detailed description of the transaction",
-    amount: "The transaction amount",
-    currency: "The currency of the transaction"
+    change: "The transaction amount",
+    symbol: "The currency or asset symbol of the transaction",
+    source: "The source of the transaction"
   },
   assertions: {
     nonNull: [
@@ -16,6 +19,7 @@ config {
       "account",
       "time",
       "label",
+      "description",
       "change",
       "symbol",
       "source"
@@ -31,6 +35,6 @@ SELECT
   Remark AS description,
   Change AS change,
   Coin AS symbol,
-  "binance" AS SOURCE
+  "binance" AS source
 FROM
   ${ref("binance_transactions_source")}
