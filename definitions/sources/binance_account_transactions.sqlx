@@ -1,0 +1,32 @@
+config {
+  type: "view",
+  database: "shikanime-studio-labs",
+  schema: "seeker",
+  name: "binance_account_transactions",
+  columns: {
+    date: "The date when the transaction occurred",
+    label: "The transaction label or category",
+    description: "Detailed description of the transaction",
+    amount: "The transaction amount",
+    currency: "The currency of the transaction"
+  },
+  assertions: {
+    nonNull: [
+      "user_id",
+      "time",
+      "label",
+      "change",
+      "symbol"
+    ]
+  }
+}
+
+SELECT
+  User_ID AS user_id,
+  UTC_Time AS time,
+  Operation AS label,
+  Remark AS description,
+  Change AS change,
+  Coin AS symbol
+FROM
+  ${ref("binance_account_transactions_source")}
