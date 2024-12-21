@@ -37,6 +37,23 @@ module "bigquery_datasets_iam" {
   }
 }
 
+resource "google_bigquery_data_transfer_config" "binance_transactions" {
+  project                = var.project
+  location               = var.location
+  data_source_id         = "google_cloud_storage"
+  display_name           = "${var.display_name} Binance Transactions"
+  schedule               = "first sunday of quarter 00:00"
+  destination_dataset_id = local.dataset_id
+  params = {
+    destination_table_name_template = "binance_transactions"
+    data_path_template              = "${module.cloud_storage.url}/*.csv"
+    write_disposition               = "APPEND"
+    file_format                 = "CSV"
+    skip_leading_rows = 1
+  }
+  service_account_name = module.service_accounts.email
+}
+
 resource "google_dataform_repository" "default" {
   provider = google-beta
 
