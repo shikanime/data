@@ -11,6 +11,17 @@ module "bigquery" {
   description  = var.description
   project_id   = var.project
   location     = var.location
+
+  access = [
+    {
+      role          = "OWNER"
+      special_group = "projectOwners"
+    },
+    {
+      role          = "WRITER"
+      user_by_email = module.service_accounts.email
+    }
+  ]
 }
 
 module "bigquery_assertions" {
@@ -22,22 +33,16 @@ module "bigquery_assertions" {
   description  = "Dataform assertions"
   project_id   = var.project
   location     = var.location
-}
-
-module "bigquery_datasets_iam" {
-  source  = "terraform-google-modules/iam/google//modules/bigquery_datasets_iam"
-  version = "~> 8.0"
-
-  project = var.project
-  bigquery_datasets = [
-    local.dataset_id,
-    "${local.dataset_id}_assertions"
+  access = [
+    {
+      role          = "OWNER"
+      special_group = "projectOwners"
+    },
+    {
+      role          = "WRITER"
+      user_by_email = module.service_accounts.email
+    }
   ]
-  mode = "additive"
-
-  bindings = {
-    "roles/bigquery.dataEditor" = module.service_accounts.iam_emails_list
-  }
 }
 
 resource "google_dataform_repository" "default" {
