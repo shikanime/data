@@ -1,18 +1,18 @@
 variable "name" {
   type        = string
-  default     = "shikanime"
+  default     = "seeker"
   description = "Name"
 }
 
 variable "display_name" {
   type        = string
-  default     = "Shikanime Studio Data Platform"
+  default     = "Shikanime Data Platform"
   description = "Human readable name"
 }
 
 variable "description" {
   type        = string
-  default     = "Shikanime Studio Data Platform"
+  default     = "Shikanime Data Platform"
   description = "Description"
 }
 
@@ -37,5 +37,5 @@ variable "location" {
 variable "repository" {
   type        = string
   description = "Name of the repository"
-  default     = "shikanime/data"
+  default     = "shikanime/seeker"
 }

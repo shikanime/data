@@ -1,11 +1,11 @@
 {
-  "name": "shikanime",
+  "name": "@shikanime/seeker",
   "version": "0.1.0",
-  "description": "Shikanime Studio Data Platform",
+  "description": "Shikanime Data Platform",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/shikanime/data.git"
+    "url": "https://github.com/shikanime/seeker.git"
   },
   "author": "engineering@shikanime.studio",
   "license": "MIT",
