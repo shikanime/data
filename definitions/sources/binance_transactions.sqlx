@@ -17,7 +17,8 @@ config {
       "time",
       "label",
       "change",
-      "symbol"
+      "symbol",
+      "source"
     ]
   }
 }
@@ -29,6 +30,7 @@ SELECT
   Operation AS label,
   Remark AS description,
   Change AS change,
-  Coin AS symbol
+  Coin AS symbol,
+  "binance" AS source
 FROM
   ${ref("binance_transactions_source")}
