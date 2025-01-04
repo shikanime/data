@@ -5,6 +5,7 @@ provider "registry.opentofu.org/hashicorp/google" {
   version     = "6.13.0"
   constraints = ">= 3.53.0, >= 4.83.0, >= 5.39.0, >= 5.43.0, ~> 6.13, < 7.0.0"
   hashes = [
+    "h1:2nfve6dFmUN9y6huJ92nicqB083HQq1QwHe03GQpf64=",
     "h1:dqNXyXSgfiXudnYOywuPSXTwTqFcK0w2fOE+1yHpYq8=",
     "zh:051e86a775ffb0140603d0a280cae5b622c16997197944e68b509cc89a702e12",
     "zh:1db6571b0c83808ab1af038334c8dbed97e0103d18af74b982014ef4307692ed",
@@ -24,6 +25,7 @@ provider "registry.opentofu.org/hashicorp/google-beta" {
   constraints = ">= 4.83.0, ~> 6.13, < 7.0.0"
   hashes = [
     "h1:Mj+nHwJTc8R58/RZ/XZ/jKOuRkrs+giXOSRkxX6SiHw=",
+    "h1:ffOIFk3FkgYQFtB0VHYK6/mwxhd6lv1jGxlyJzfpmpo=",
     "zh:03f833e365a91effab7e5ae82056b5835e4532d1a484bfd018f7720eae57c167",
     "zh:06f8a0626b4d74f711fcf2c8bf73822e234fa103150381346515edfed235dd81",
     "zh:1275dd7b5796baef551113d67b0f31fab00161dd62bde857cc95104cf38a2f70",
@@ -42,6 +44,7 @@ provider "registry.opentofu.org/hashicorp/random" {
   constraints = ">= 2.1.0"
   hashes = [
     "h1:Ry0Lr0zaoicslZlcUR4rAySPpl/a7QupfMfuAxhW3fw=",
+    "h1:ohM08k4QVd81oVSJnFI53wJjPcH23XlYG4WslS9og2Q=",
     "zh:1bfd2e54b4eee8c761a40b6d99d45880b3a71abc18a9a7a5319204da9c8363b2",
     "zh:21a15ac74adb8ba499aab989a4248321b51946e5431219b56fc827e565776714",
     "zh:221acfac3f7a5bcd6cb49f79a1fca99da7679bde01017334bad1f951a12d85ba",
@@ -60,6 +63,7 @@ provider "registry.opentofu.org/hashicorp/tls" {
   constraints = "~> 4.0"
   hashes = [
     "h1:EJoUGDo7L52Iu22cA1KCndJ9B1Rrfd75wyZzsScEnc0=",
+    "h1:nbB85V/P7q9ZPajmun379YAaURjhrXb7QbzFR//YQvA=",
     "zh:4b53b372767e5068d9bbfc89199201c1ae4283dde2f0c301974f8abb4215791f",
     "zh:5b4c308bd074c6d0bd560220e6ee10a9859ca9a1f29a59367b0477a740ff265e",
     "zh:674dd6bc85597677e160ee601d88b21c5a974759a658769812d2904bd94bc042",
@@ -77,6 +81,7 @@ provider "registry.opentofu.org/integrations/github" {
   version     = "6.4.0"
   constraints = "~> 6.4"
   hashes = [
+    "h1:B1q5+Ub1G3zJa9y474Fg40eo/N04/vOSeaf3dWaCG0I=",
     "h1:sJvuRMYWJ/ykZXTuoCuocHvx06hTwDVrXVVXq1814bw=",
     "zh:00f431c2a2510efcb1115442dda5e90815bcb16e1a3301679ade0139fa963d3b",
     "zh:12a862f4317b3cb65682c1b687650cd91eeee99e63774bdcfa8bcfc64bad097b",
